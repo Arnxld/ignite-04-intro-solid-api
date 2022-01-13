@@ -1,0 +1,117 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Ignite Node Challenge 4 Documentation",
+        "description": "This is an API Challenge",
+        "version": "1.0.0",
+        "contact": {
+            "email": "pedro.arnold13@gmail.com"
+        }
+    },
+    "paths": {
+        "/users": {
+            "get": {
+                "tags": ["User"],
+                "summary": "Get a list of all users",
+                "description": "Get a list of all users",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "The required user does not exist"
+                    }
+                }
+
+            },
+            "post": {
+                "tags": ["User"],
+                "summary": "Create a user",
+                "description": "Create a new user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "user name sample",
+                                    "email": "user email sample"
+                                }    
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "Email was already taken"
+                    }
+                }
+            }
+        },
+        "/users/{user_id}/admin": {
+            "patch": {
+                "tags": ["User"],
+                "summary": "Turn a user into an admin",
+                "description": "Turn a user into an admin",
+                "parameters": [
+                    {
+                      "name": "user_id",
+                      "in": "path",
+                      "description": "ID of the user that will be updated to an admin",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The required user is now an admin"
+                    },
+                    "404": {
+                        "description": "The required user does not exist"
+                    }
+                }
+
+            }
+        },
+        "/users/{user_id}": {
+            "get": {
+                "tags": ["User"],
+                "summary": "Get an user's info",
+                "description": "Get an user's info",
+                "parameters": [
+                    {
+                      "name": "user_id",
+                      "in": "path",
+                      "description": "ID of the required user",
+                      "required": true,
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "The required user does not exist"
+                    }
+                }
+
+            }
+        }
+    }
+}
